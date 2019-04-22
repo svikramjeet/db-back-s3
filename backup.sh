@@ -59,14 +59,14 @@ printf "${Green}Start dump${EC}"
 # gzip /tmp/"${DBNAME}_${FILENAME}"
 
 #time pg_dump $DATABASE_URL | gzip >  /tmp/"${DBNAME}_${FILENAME}".gz
-#time pg_dump -b -F c --dbname=$DATABASE_URL | gzip >  /tmp/"${DBNAME}_${FILENAME}".gz
-time pg_dump -b -F c --dbname=$DATABASE_URL >  /tmp/"${DBNAME}_v_${FILENAME}".gz
+time pg_dump -b -F c --dbname=$DATABASE_URL | gzip >  /tmp/"${DBNAME}_${FILENAME}".gz
+#time pg_dump -b -F c --dbname=$DATABASE_URL >  /tmp/"${DBNAME}_v_${FILENAME}".gz
 
 #EXPIRATION_DATE=$(date -v +"2d" +"%Y-%m-%dT%H:%M:%SZ") #for MAC
 EXPIRATION_DATE=$(date -d "$EXPIRATION days" +"%Y-%m-%dT%H:%M:%SZ")
 
 printf "${Green}Move dump to AWS${EC}"
-#time /app/vendor/awscli/bin/aws s3 cp /tmp/"${DBNAME}_${FILENAME}".gz s3://$S3_BUCKET_PATH/$DBNAME/"${DBNAME}_${FILENAME}".gz --expires $EXPIRATION_DATE
-time /app/vendor/awscli/bin/aws s3 cp /tmp/"${DBNAME}_v_${FILENAME}" s3://$S3_BUCKET_PATH/$DBNAME/"${DBNAME}_${FILENAME}" --expires $EXPIRATION_DATE
+time /app/vendor/awscli/bin/aws s3 cp /tmp/"${DBNAME}_${FILENAME}".gz s3://$S3_BUCKET_PATH/$DBNAME/"${DBNAME}_${FILENAME}".gz --expires $EXPIRATION_DATE
+#time /app/vendor/awscli/bin/aws s3 cp /tmp/"${DBNAME}_v_${FILENAME}" s3://$S3_BUCKET_PATH/$DBNAME/"${DBNAME}_${FILENAME}" --expires $EXPIRATION_DATE
 # cleaning after all
 rm -rf /tmp/"${DBNAME}_${FILENAME}".gz
