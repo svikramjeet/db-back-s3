@@ -1,18 +1,18 @@
 #!/bin/bash
 
-FNAME="heroku-env-backup"
+FNAME="heroku-dns-backup"
 EXPIRATION="30"
 Green='\033[0;32m'
 EC='\033[0m' 
 FILENAME=`date +%H_%M_%d%m%Y`
-sourceApp="$1"
+
 
 # terminate script on any fails
 set -e
 
 printf "${Green}Start env-dump${EC}"
 
-dig brewbroker.com any +noall +answer | gzip >  /tmp/"${FNAME}_${FILENAME}".gz
+dig $1 any +noall +answer | gzip >  /tmp/"${FNAME}_${FILENAME}".gz
 
 
 EXPIRATION_DATE=$(date -d "$EXPIRATION days" +"%Y-%m-%dT%H:%M:%SZ")
