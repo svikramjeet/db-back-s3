@@ -15,7 +15,7 @@ printf "${Green}Start env-dump${EC}"
 #download heroku cli
 # lgin to cli
 
-time heroku config -s -a "$sourceApp"  | gzip >  /tmp/"${FNAME}_${FILENAME}".gz
+time printenv  | gzip >  /tmp/"${FNAME}_${FILENAME}".gz
 
 EXPIRATION_DATE=$(date -d "$EXPIRATION days" +"%Y-%m-%dT%H:%M:%SZ")
 
