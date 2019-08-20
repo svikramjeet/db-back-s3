@@ -39,8 +39,9 @@ if [ ! -d "vendor" ]; then
 fi
 
 echo "-----> Add backup script to app/vendor"
-cp "$BUILDPACK_DIR/backup.sh" $BUILD_DIR/vendor/
 
+cp "$BUILDPACK_DIR/backup.sh" $BUILD_DIR/vendor/
 cp "$BUILDPACK_DIR/env-backup.sh" $BUILD_DIR/vendor/
+cp "$BUILDPACK_DIR/dns-backup.sh" $BUILD_DIR/vendor/
 
 echo "-----> backup script moved"
