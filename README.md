@@ -28,7 +28,19 @@ Create scheduler.
 heroku addons:open scheduler --app <your_app>
 ```
 Now in browser `Add new Job`.
+
 Paste next line:
+
+> For DB backup
 `bash /app/vendor/backup.sh -db <somedbname>`
 and configure FREQUENCY. Paramenter `db` is used for naming convention when we create backups. We don't use it for dumping  database with the same name.
+
+> For DNS backup
+`bash /app/vendor/dns-backup.sh domainname`
+Paramenter `domainname` is used for domain eg google.com, please donot add http:// or https.
+
+
+> For ENV backup
+`bash /app/vendor/env-backup.sh`
+
 
