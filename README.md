@@ -29,7 +29,7 @@ heroku addons:open scheduler --app <your_app>
 ```
 Now in browser `Add new Job`.
 
-Paste next line:
+Add different as mentioned below:
 
 > For DB backup
 `bash /app/vendor/backup.sh -db <somedbname>`
