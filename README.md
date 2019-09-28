@@ -12,7 +12,7 @@ heroku buildpacks:add https://github.com/svikramjeet/db-back-s3 --app <your_app>
 ```
 heroku config:add AWS_ACCESS_KEY_ID=XXX --app <your_app>
 heroku config:add AWS_SECRET_ACCESS_KEY=YYY --app <your_app>
-heroku config:add AWS_DEFAULT_REGION=eu-west-1 --app <your_app>
+heroku config:add AWS_DEFAULT_REGION=region --app <your_app> (region example eu-west-1)
 heroku config:add S3_BUCKET_PATH=bucket_name --app <your_app>
 
 ```
