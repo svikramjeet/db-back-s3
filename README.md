@@ -47,12 +47,12 @@ Paramenter `domainname` is used for domain eg google.com, please donot add http:
 ## Road map
 Here's the plan for what's coming:
 
-- [x] Heroku DB backup on S3
-- [x] Heroku DNS backup on S3
-- [x] Heroku env backup on S3
+- [x] DB backup on S3
+- [x] DNS backup on S3
+- [x] env backup on S3
 - [ ] Remove backup after 1 month from S3
 - [ ] Keep back  of 1st day of every month
-- [ ] Encrpt database
+- [ ] Encrypt database
 
 And here are some ideas I'm still not sure about:
 - [ ] Slack notification on each backup
