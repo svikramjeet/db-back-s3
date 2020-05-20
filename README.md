@@ -44,3 +44,17 @@ Paramenter `domainname` is used for domain eg google.com, please donot add http:
 `bash /app/vendor/env-backup.sh`
 
 
+## Road map
+Here's the plan for what's coming:
+
+- [x] Heroku DB backup on S3
+- [x] Heroku DNS backup on S3
+- [x] Heroku env backup on S3
+- [ ] Remove backup after 1 month from S3
+- [ ] Keep back  of 1st day of every month
+- [ ] Encrpt database
+
+And here are some ideas I'm still not sure about:
+- [ ] Slack notification on each backup
+- [ ] Backup before each deploy
+- [ ] Add option to backup on GCP
