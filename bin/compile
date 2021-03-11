@@ -29,7 +29,7 @@ mkdir -p "${BUILD_DIR}/vendor"
 
 if [[ "${BUILD_DIR}" != /app ]]; then
   mkdir -p /app
-  ln -nsf "${BUILD_DIR}/vendor" "/app/vendor"
+  ln -nsf "${BUILD_DIR}/vendor" "${INSTALL_DIR}"
 fi
 
 echo "-----> Installing aws binary"
