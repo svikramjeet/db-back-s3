@@ -25,6 +25,11 @@ echo "path->$BUILDPACK_DIR"
 echo "-----> Download AWS CLI V2 and install"
 curl --progress-bar $AWS_CLI_URL -o "awscliv2.zip"
 
+if [[ "${BUILD_DIR}" != /app ]]; then
+  mkdir -p /app
+  ln -nsf "${BUILD_DIR}/.awscli" "${INSTALL_DIR}"
+fi
+
 echo "-----> Installing aws binary"
 unzip -q awscliv2.zip
 ./aws/install --install-dir "/app/vendor/awscli" --bin-dir "/app/vendor/bin"
