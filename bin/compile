@@ -25,7 +25,7 @@ curl --progress-bar $AWS_CLI_URL -o "awscliv2.zip"
 
 echo "-----> Installing aws binary"
 unzip -qq -d "$BUILD_DIR/vendor" awscliv2.zip
-"$BUILD_DIR/vendor/aws/install" --bin-dir /tmp/bin --install-dir /tmp/aws
+"$BUILD_DIR/vendor/aws/install" --bin-dir /bin --install-dir /aws
 
 #cleaning up...
 
