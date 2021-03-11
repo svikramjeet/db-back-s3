@@ -16,7 +16,7 @@ AWS_CLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
 # parse and derive params
 BUILD_DIR=$1
 CACHE_DIR=$2
-INSTALL_DIR="/app/vendor/"
+INSTALL_DIR="/app/vendor"
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILDPACK_DIR="$(dirname $(dirname $0))"
 
