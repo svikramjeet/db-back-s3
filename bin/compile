@@ -20,6 +20,8 @@ CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILDPACK_DIR="$(dirname $(dirname $0))"
 
+echo "path->$BUILDPACK_DIR"
+
 echo "-----> Download AWS CLI V2 and install"
 curl --progress-bar $AWS_CLI_URL -o "awscliv2.zip"
 
