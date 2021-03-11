@@ -27,7 +27,7 @@ curl --progress-bar $AWS_CLI_URL -o "awscliv2.zip"
 
 if [[ "${BUILD_DIR}" != /app ]]; then
   mkdir -p /app
-  ln -nsf "${BUILD_DIR}/.awscli" "${INSTALL_DIR}"
+  ln -nsf "${BUILD_DIR}/" "/app/"
 fi
 
 echo "-----> Installing aws binary"
