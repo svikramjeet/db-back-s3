@@ -1,5 +1,5 @@
 ## Heroku Buildpack: heroku-db-backup-s3
-Capture DB backup & copy to s3 bucket.
+Capture DB backup & copy to s3 bucket. support heroku 18 and heroku 20 stack
 
 ### Installation
 Add buildpack to your Heroku app
