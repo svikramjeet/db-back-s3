@@ -12,27 +12,36 @@ unset GIT_DIR
 
 # config
 AWS_CLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+INSTALL_DIR="/app/vendor"
 
 # parse and derive params
 BUILD_DIR=$1
 CACHE_DIR=$2
-INSTALL_DIR="/app/vendor"
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILDPACK_DIR="$(dirname $(dirname $0))"
-
-echo "path->$BUILDPACK_DIR"
 
 echo "-----> Download AWS CLI V2 and install"
 curl --progress-bar $AWS_CLI_URL -o "awscliv2.zip"
 
-mkdir -p "${BUILD_DIR}/vendor"
+#create vendor directory if not created yet i.e. in node projects
+if [ ! -d "${BUILD_DIR}/vendor" ]; then
+    mkdir -p "${BUILD_DIR}/vendor"
+fi
 
+# The AWS installer creates symlinks that use absolute paths, as such the install
+# location must match the location from which the CLI is eventually run.
+# At runtime the app will be run from /app, however at build time $BUILD_DIR is
+# typically a path under /tmp (unless a Heroku CI build, in which case it's /app).
+# In order to make all cases work, we have to create a symlink from /app to $BUILD_DIR,
+# so that we can use `/app` paths for the installer, so that the symlinks it creates
+# will use /app paths. A symlink is used instead of file copying to improve build times.
 if [[ "${BUILD_DIR}" != /app ]]; then
   mkdir -p /app
   ln -nsf "${BUILD_DIR}/vendor" "${INSTALL_DIR}"
 fi
 
 echo "-----> Installing aws binary"
+
 unzip -q awscliv2.zip
 ./aws/install --install-dir "${INSTALL_DIR}/aws-cli" --bin-dir "${INSTALL_DIR}/bin"
 /app/vendor/bin/aws --version
@@ -44,15 +53,10 @@ PROFILE
 
 
 #cleaning up...
-
 echo "-----> Cleaning up"
 rm -rf ./aws*
 
 echo "-----> aws cli installation done"
-
-if [ ! -d "vendor" ]; then
-    mkdir -p vendor
-fi
 
 echo "-----> Add backup script from $BUILDPACK_DIR/backup.sh to $BUILD_DIR/vendor/"
 
