@@ -57,3 +57,37 @@ And here are some ideas I'm still not sure about:
 - [ ] Slack notification on each backup
 - [ ] Backup before each deploy
 - [ ] Add option to backup on GCP
+
+
+## AWS Bucket Policy
+This buildpack requires specific policy allows a user, identified by their Amazon Resource Name (ARN), to perform the s3:PutObject action on an Amazon S3 bucket. The Effect is set to "Allow," indicating that this permission is granted.Here is sample bucket policy json:
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": <USER_ARN>
+            },
+            "Action": ["s3:PutObject"],
+            "Resource": [
+                "arn:aws:s3:::<Bucket name>",
+                "arn:aws:s3:::<Bucket name>/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "aws:PrincipalArn": <USER_ARN>
+                }
+            }
+        }
+    ]
+}
+
+
+
+The Resource field specifies the ARN of the bucket (arn:aws:s3:::<Bucket name>) and its contents (arn:aws:s3:::<Bucket name>/*), indicating that the user can perform the PutObject action on any object within the specified S3 bucket.
+
+The Condition field restricts the policy to the specific user identified by the aws:PrincipalArn condition key. This condition ensures that the policy applies only if the user's ARN matches the one specified in the Principal field.
+
+Please note that <USER_ARN> and <Bucket name> are placeholders in the policy, and you would need to replace them with the appropriate values specific to your AWS environment.USER_ARN format looks like `arn:aws:iam::ID:user/USER_NAME" 
