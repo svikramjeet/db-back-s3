@@ -62,6 +62,7 @@ And here are some ideas I'm still not sure about:
 ## AWS Bucket Policy
 This buildpack requires specific policy allows a user, identified by their Amazon Resource Name (ARN), to perform the s3:PutObject action on an Amazon S3 bucket. The Effect is set to "Allow," indicating that this permission is granted.Here is sample bucket policy json:
 
+```
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -83,7 +84,7 @@ This buildpack requires specific policy allows a user, identified by their Amazo
         }
     ]
 }
-
+```
 
 
 The Resource field specifies the ARN of the bucket (arn:aws:s3:::<Bucket name>) and its contents (arn:aws:s3:::<Bucket name>/*), indicating that the user can perform the PutObject action on any object within the specified S3 bucket.
