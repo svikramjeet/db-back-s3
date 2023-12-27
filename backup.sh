@@ -42,8 +42,8 @@ if [[ -z "$AWS_DEFAULT_REGION" ]]; then
   echo "Missing AWS_DEFAULT_REGION variable"
   exit 1
 fi
-if [[ -z "$S3_BUCKET_PATH" ]]; then
-  echo "Missing S3_BUCKET_PATH variable"
+if [[ -z "$AWS_BUCKET" ]]; then
+  echo "Missing AWS_BUCKET variable"
   exit 1
 fi
 if [[ -z "$DATABASE_URL" ]]; then
@@ -58,6 +58,6 @@ time pg_dump -b -F c --dbname=$DATABASE_URL | gzip >  /tmp/"${DBNAME}_${FILENAME
 EXPIRATION_DATE=$(date -d "$EXPIRATION days" +"%Y-%m-%dT%H:%M:%SZ")
 
 printf "${Green}Move dump to AWS${EC}"
-time /app/vendor/bin/aws s3 cp /tmp/"${DBNAME}_${FILENAME}".gz s3://$S3_BUCKET_PATH/$DBNAME/"${DBNAME}_${FILENAME}".gz --expires $EXPIRATION_DATE
+time /app/vendor/bin/aws s3 cp /tmp/"${DBNAME}_${FILENAME}".gz s3://$AWS_BUCKET/$DBNAME/"${DBNAME}_${FILENAME}".gz --expires $EXPIRATION_DATE
 # cleaning after all
 rm -rf /tmp/"${DBNAME}_${FILENAME}".gz
