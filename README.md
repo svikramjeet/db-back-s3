@@ -91,4 +91,4 @@ The Resource field specifies the ARN of the bucket (arn:aws:s3:::<Bucket name>) 
 
 The Condition field restricts the policy to the specific user identified by the aws:PrincipalArn condition key. This condition ensures that the policy applies only if the user's ARN matches the one specified in the Principal field.
 
-Please note that <USER_ARN> and <Bucket name> are placeholders in the policy, and you would need to replace them with the appropriate values specific to your AWS environment.USER_ARN format looks like `arn:aws:iam::ID:user/USER_NAME" 
+Please note that <USER_ARN> and <Bucket name> are placeholders in the policy, and you would need to replace them with the appropriate values specific to your AWS environment.USER_ARN format looks like `arn:aws:iam::ID:user/USER_NAME`
